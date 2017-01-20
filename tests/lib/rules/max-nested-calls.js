@@ -21,17 +21,16 @@ var ruleTester = new RuleTester();
 ruleTester.run("max-nested-calls", rule, {
 
     valid: [
-
-        // give me some code that won't trigger a warning
+        { code: 'foo(bar())' },
+        { code: 'foo(bar(baz()))', options: [{ max: 3 }] },
+        { code: 'foo(bar(baz()), qux())', options: [{ max: 3 }] }
     ],
 
     invalid: [
         {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
+            code: 'foo(bar(baz()))',
+            options: [{ max: 2 }],
+            errors: ["Function calls are nested too deeply (3)."]
         }
     ]
 });
