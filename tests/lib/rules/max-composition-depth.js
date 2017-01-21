@@ -8,7 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require("../../../lib/rules/max-nested-calls");
+const rule = require("../../../lib/rules/max-composition-depth");
 const RuleTester = require("eslint").RuleTester;
 
 const parserOptions = {
