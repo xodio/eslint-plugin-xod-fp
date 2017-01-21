@@ -55,7 +55,7 @@ ruleTester.run("max-nested-calls", rule, {
     { code: 'foo(bar())' },
     { code: 'foo(bar(baz()))', options: [{ max: 3 }] },
     { code: 'foo(bar(baz()), qux())', options: [ 3 ] },
-    { code: fixture, options: [ 5 ], parserOptions }
+    { code: fixture, options: [ 6 ], parserOptions }
   ],
 
   invalid: [
@@ -65,16 +65,22 @@ ruleTester.run("max-nested-calls", rule, {
       errors: ["Function calls are nested too deeply (3)."]
     },
     {
+      code: 'foo(bar(x => x + 1))',
+      options: [ 2 ],
+      errors: ["Function calls are nested too deeply (3)."],
+      parserOptions,
+    },
+    {
       code: fixture,
-      options: [ 4 ],
+      options: [ 5 ],
       errors: [
         {
-          message: "Function calls are nested too deeply (5).",
+          message: "Function calls are nested too deeply (6).",
           line: 11,
           column: 21
         },
         {
-          message: "Function calls are nested too deeply (5).",
+          message: "Function calls are nested too deeply (6).",
           line: 12,
           column: 21
         },
