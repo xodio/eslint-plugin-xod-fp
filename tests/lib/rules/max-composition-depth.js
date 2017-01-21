@@ -62,12 +62,12 @@ ruleTester.run("max-nested-calls", rule, {
     {
       code: 'foo(bar(baz()))',
       options: [{ max: 2 }],
-      errors: ["Function calls are nested too deeply (3)."]
+      errors: ["Composition depth exceeded (3)."]
     },
     {
       code: 'foo(bar(x => x + 1))',
       options: [ 2 ],
-      errors: ["Function calls are nested too deeply (3)."],
+      errors: ["Composition depth exceeded (3)."],
       parserOptions,
     },
     {
@@ -75,12 +75,12 @@ ruleTester.run("max-nested-calls", rule, {
       options: [ 5 ],
       errors: [
         {
-          message: "Function calls are nested too deeply (6).",
+          message: "Composition depth exceeded (6).",
           line: 11,
           column: 21
         },
         {
-          message: "Function calls are nested too deeply (6).",
+          message: "Composition depth exceeded (6).",
           line: 12,
           column: 21
         },
