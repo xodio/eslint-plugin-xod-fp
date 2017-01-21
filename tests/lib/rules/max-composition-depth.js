@@ -55,10 +55,24 @@ ruleTester.run("max-nested-calls", rule, {
     { code: 'foo(bar())' },
     { code: 'foo(bar(baz()))', options: [{ max: 3 }] },
     { code: 'foo(bar(baz()), qux())', options: [ 3 ] },
-    { code: fixture, options: [ 6 ], parserOptions }
+    { code: fixture, options: [ 6 ], parserOptions },
+    {
+      code: 'foo(bar(x => x + 1))',
+      options: [{ max: 2, ignoreArrow: true }],
+      parserOptions,
+    },
+    {
+      code: 'foo(x => bar(x))',
+      options: [{ max: 2, ignoreArrow: true }],
+      parserOptions,
+    },
   ],
 
   invalid: [
+    {
+      code: 'foo(bar(baz(qux(boo()))))',
+      errors: ["Composition depth exceeded (5)."]
+    },
     {
       code: 'foo(bar(baz()))',
       options: [{ max: 2 }],
@@ -86,6 +100,18 @@ ruleTester.run("max-nested-calls", rule, {
         },
       ],
       parserOptions
-    }
+    },
+    {
+      code: 'foo(bar(x => x + 1))',
+      options: [{ max: 2 }],
+      errors: ["Composition depth exceeded (3)."],
+      parserOptions,
+    },
+    {
+      code: 'foo(x => bar(x))',
+      options: [{ max: 2 }],
+      errors: ["Composition depth exceeded (3)."],
+      parserOptions,
+    },
   ]
 });
