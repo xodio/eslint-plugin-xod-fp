@@ -66,6 +66,10 @@ ruleTester.run("max-nested-calls", rule, {
       options: [{ max: 2, ignoreArrow: true }],
       parserOptions,
     },
+    {
+      code: 'R.curry(bar(baz()))',
+      options: [{ max: 2, ignoreCurry: true }]
+    },
   ],
 
   invalid: [
