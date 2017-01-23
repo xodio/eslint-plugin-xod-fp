@@ -1,8 +1,10 @@
 {
-  "name": "eslint-plugin-xod-ramda",
+  "name": "eslint-plugin-xod-fp",
   "version": "0.0.0",
-  "description": "Ramda rules",
+  "description": "ESLint FP/Ramda rules",
   "keywords": [
+    "fp",
+    "ramda",
     "eslint",
     "eslintplugin",
     "eslint-plugin"
@@ -20,7 +22,7 @@
     "mocha": "^3.1.2"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6.0.0"
   },
-  "license": "ISC"
+  "license": "MIT"
 }
