@@ -27,9 +27,9 @@ You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
-    "plugins": [
-        "xod-fp"
-    ]
+  "plugins": [
+    "xod-fp"
+  ]
 }
 ```
 
@@ -37,9 +37,9 @@ Then configure the rules you want to use under the rules section.
 
 ```json
 {
-    "rules": {
-        "xod-fp/max-composition-depth": [ 'error', 5 ],
-    }
+  "rules": {
+    "xod-fp/max-composition-depth": [ "error", 5 ],
+  }
 }
 ```
 
