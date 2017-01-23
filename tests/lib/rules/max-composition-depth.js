@@ -22,7 +22,7 @@ const parserOptions = {
 // Fixtures
 //------------------------------------------------------------------------------
 
-const fixture = [
+const deepFixture = [
   'const convertPatches = R.compose(',
   '  composeT,',
   '  R.converge(',
@@ -44,6 +44,14 @@ const fixture = [
   ');'
 ].join('\n');
 
+const mochaFixture = [
+  'describe("Foo", () => {',
+  '  it("should bla bla", () => {',
+  '    assert(42 === 42);',
+  '  });',
+  '});',
+].join('\n');
+
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
@@ -55,7 +63,7 @@ ruleTester.run("max-nested-calls", rule, {
     { code: 'foo(bar())' },
     { code: 'foo(bar(baz()))', options: [{ max: 3 }] },
     { code: 'foo(bar(baz()), qux())', options: [ 3 ] },
-    { code: fixture, options: [ 6 ], parserOptions },
+    { code: deepFixture, options: [ 6 ], parserOptions },
     {
       code: 'foo(bar(x => x + 1))',
       options: [{ max: 2, ignoreArrow: true }],
@@ -69,6 +77,11 @@ ruleTester.run("max-nested-calls", rule, {
     {
       code: 'R.curry(bar(baz()))',
       options: [{ max: 2, ignoreCurry: true }]
+    },
+    {
+      code: mochaFixture,
+      options: [{ max: 2, ignoreMocha: true }],
+      parserOptions
     },
   ],
 
@@ -89,7 +102,7 @@ ruleTester.run("max-nested-calls", rule, {
       parserOptions,
     },
     {
-      code: fixture,
+      code: deepFixture,
       options: [ 5 ],
       errors: [
         {
@@ -115,6 +128,12 @@ ruleTester.run("max-nested-calls", rule, {
       code: 'foo(x => bar(x))',
       options: [{ max: 2 }],
       errors: ["Composition depth exceeded (3)."],
+      parserOptions,
+    },
+    {
+      code: mochaFixture,
+      options: [{ max: 4 }],
+      errors: ["Composition depth exceeded (5)."],
       parserOptions,
     },
   ]
