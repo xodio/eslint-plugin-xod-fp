@@ -160,3 +160,14 @@ Calling `R.curry` is just a fighting with JavaScript to make it more
 FP-compatible. If you see `R.curry` you probably would not think about it
 at all trying to understand what an overall function does. So it is a good
 idea to ignore currying in depth calculation as well.
+
+#### `ignoreMocha`
+
+Defaults to false.
+
+Pass `{ ignoreMocha: true }` to not to take `it` and `describe` calls of
+[Mocha](https://mochajs.org/) into account when counting the depth. Child
+arrow functions of `it` and `describe` will be ignored as well.
+
+Mocha’s functions are part of testing DSL and are not part of functions logic,
+so do not add to a function complexity thus can be ignored.
