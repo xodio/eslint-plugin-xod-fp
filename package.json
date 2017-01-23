@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-xod-fp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": "https://github.com/xodio/eslint-plugin-xod-fp",
   "description": "ESLint FP/Ramda rules",
   "keywords": [
